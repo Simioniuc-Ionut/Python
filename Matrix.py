@@ -27,6 +27,18 @@ class Matrix:
             return None
         mat3=mat1 @ mat2
         return mat3.tolist()
+    def dot_product2(self,matrix):
+        if self.cols != len(matrix): # if nr of cols != nr of rows
+            return None
+        new_matr = [[0 for j in range(len(matrix[0]))] for i in range(self.rows) ]
+
+        for i in range(self.rows):
+            for k in range(len(matrix[0])):
+                s = 0
+                for j in range(self.cols):
+                    s += self.matrix[i][j] * matrix[j][k]
+                new_matr[k][i] = s
+        return new_matr
     def apply_fun(self,func):
         for i in range(self.rows):
             for j in range(self.cols):
@@ -56,6 +68,7 @@ if __name__ == "__main__":
     print("Matrix 1:", m.matrix)
     print("Matrix 2:", m2.matrix)
     print("Dot product:", m.dot_product(m2.matrix))
+    print("Dot product:", m.dot_product2(m2.matrix))
 
     # Test apply_fun method
     m.apply_fun(lambda x: x * 2)
