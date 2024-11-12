@@ -11,14 +11,15 @@ def py_script2():
         try:
             file_path= os.path.join(dir_path,file)
             # print("fp:",file_path)
-            with open(file_path, 'r') as f:
-                base_name = os.path.basename(f.name)
-                new_name = f"{base_name[:base_name.find('.')]}_{count_file}{base_name[base_name.find('.'):]}"
-            # print("nm,:", new_name)
-            new_path_file = os.path.join(dir_path,new_name)
-            # print("ff ", file_path,new_path_file)
-            os.rename(file_path,new_path_file)
-            count_file+=1
+            if os.path.isfile(file_path):
+                with open(file_path, 'r') as f:
+                    base_name = os.path.basename(f.name)
+                    new_name = f"{base_name[:base_name.find('.')]}_{count_file}{base_name[base_name.find('.'):]}"
+                # print("nm,:", new_name)
+                new_path_file = os.path.join(dir_path,new_name)
+                # print("ff ", file_path,new_path_file)
+                os.rename(file_path,new_path_file)
+                count_file+=1
         except FileNotFoundError:
             print("File not found")
         except Exception as e:
